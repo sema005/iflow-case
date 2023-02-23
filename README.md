@@ -17,6 +17,11 @@ Ektra bibloteker:
  [Directus](https://docs.directus.io/getting-started/introduction.html).
 
 ```bash
+git clone https://github.com/sema005/iflow-case.git
+```
+```bash
 npm install
+```
+```bash
 npm start
 ```
