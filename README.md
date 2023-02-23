@@ -10,7 +10,7 @@ npm create-react-app
 
 
 
-## Installation
+## Installasjon
 
 Ektra bibloteker:
  [React-Toastify](https://fkhadra.github.io/react-toastify/introduction),
@@ -25,3 +25,8 @@ npm install
 ```bash
 npm start
 ```
+
+
+## Directus
+
+Har brukt directus som backend, du kan lese, endre og slette uten å logge inn. Det kan kjapt endres hvis man ville brukt login, men siden vi ikke skulle legge tid i det gjorde jeg det sånn.
