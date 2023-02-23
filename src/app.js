@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 const App = () => {
   const [data, setData] = useState([]);
+
   return (
     <BrowserRouter>
       <Routes>

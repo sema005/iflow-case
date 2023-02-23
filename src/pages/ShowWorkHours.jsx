@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import "reactjs-popup/dist/index.css";
 import 'react-toastify/dist/ReactToastify.css';
 import styled from "styled-components";
@@ -7,7 +7,8 @@ import Loader from "../components/Loader";
 import RegisterHours from "../components/RegisterHours";
 import WorkHours from "../components/WorkHours";
 import { directus } from "../services/directus.serivce";
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
+import { errorToast, deletedToast, editToast, sucessToast, alertHoursToast } from "../toasts/toast";
 
 const MainContainer = styled.div`
   width: 100vw;
@@ -42,8 +43,21 @@ const Title = styled.h1`
 `;
 
 const NewContainer = styled.div`
-  height: 250px;
   width: 100%;
+  margin-bottom: 2rem;
+`;
+
+const Card = styled.div`
+  display: grid;
+  justify-items: center;
+  box-shadow: 5px 5px 5px 5px #ddd0c8;
+  border-radius: 15px;
+  position: relative;
+  gap: 1rem;
+  width: 30%;
+  margin: auto;
+  padding: 1rem 0px 1rem 0px;
+  margin-bottom: 1rem;
 `;
 
 const ShowWorkHours = ({ data, setData }) => {
@@ -51,18 +65,8 @@ const ShowWorkHours = ({ data, setData }) => {
   const [comment, setComment] = useState("");
   const [editState, setEditeState] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const sucessToast = () => toast.success("Timer registrert",{
-    position: "bottom-center"
-  })
-  const errorToast = () => toast.warn("Husk å fylle inn",{
-    position: "bottom-center"
-  })
-  const deletedToast = () => toast.success("Slettet",{
-    position: "bottom-center"
-  })
-  const editToast = () => toast.success("Endret",{
-    position: "bottom-center"
-  })
+  const [totalHours, setTotalHours] = useState(0)
+  
 
   const toggleEdit = () => {
     setEditeState(!editState);
@@ -81,14 +85,29 @@ const ShowWorkHours = ({ data, setData }) => {
   `);
       setData(response.data.time_register);
       setIsLoading(false);
-      console.log("www");
     } catch (error) {
       console.log(error);
     }
   };
-  useEffect(() => {
-    fetchData();
-  }, []);
+  
+  useEffect( () => {
+    fetchData()
+  }, [])
+
+  const getTotalHours = useCallback(() => {
+    const hours = []
+    data.forEach(el => {
+      hours.push(el.work_time)
+    });
+    setTotalHours(hours.reduce( (sumA, sumB) => sumA + sumB, 0))
+    if(totalHours >= 100){
+      alertHoursToast()
+    }
+  }, [data, totalHours]);
+  
+  useEffect( () => {
+    getTotalHours()
+  }, [data, getTotalHours])
 
   const deleteItem = async (id) => {
     await directus.items("time_register").deleteOne(id);
@@ -144,6 +163,10 @@ const ShowWorkHours = ({ data, setData }) => {
             setComment={setComment}
           />
         </NewContainer>
+        <Card>
+        <Title>Totale timer</Title>
+          <p>Totalt {totalHours}</p>
+        </Card>
         <Title>Timeoversikt</Title>
         <SectionWorkHours>
           {data.map((item) => {

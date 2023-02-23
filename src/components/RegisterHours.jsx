@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components";
-import { directus } from "../services/directus.serivce";
 
 
 const Form = styled.div`
@@ -21,6 +20,7 @@ const TextArea = styled.textarea`
 const InputBoxes = styled.div`
     display: grid;
     grid-template-columns: 1fr;
+    margin-bottom: 1rem;
 `
 
 const AddButton = styled.button`
