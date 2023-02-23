@@ -7,7 +7,9 @@ som blir lagt til
 
 ## Installation
 
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.
+Ektra bibloteker:
+ [React-Toastify](https://fkhadra.github.io/react-toastify/introduction).
+ [Directus](https://docs.directus.io/getting-started/introduction.html).
 
 ```bash
 git clone https://github.com/sema005/iflow-case.git
