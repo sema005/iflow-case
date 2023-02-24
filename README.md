@@ -8,8 +8,6 @@ Applikasonen er skrevet med react
 npm create-react-app
 ```
 
-
-
 ## Installasjon
 
 Ektra bibloteker:
@@ -30,3 +28,7 @@ npm start
 ## Directus
 
 Har brukt directus som backend, du kan lese, endre og slette uten å logge inn. Det kan kjapt endres hvis man ville brukt login, men siden vi ikke skulle legge tid i det gjorde jeg det sånn.
+
+# Tester
+
+Har dessverre ikke rukket å lage tester da jeg har mye med bachelor oppgaven og jobb ved siden av.
